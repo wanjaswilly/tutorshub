@@ -1,0 +1,27 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class HelpTickets extends Model
+{
+    //
+
+    protected $fillable = [
+
+    ];
+
+    public function owner()
+    {
+        return $this->belongsTo(User::class, 'createdBy', 'id');
+    }
+
+    public function assignedTo() :BelongsTo
+    {
+        return $this->belongsTo(Admin::class, 'assignedTo', 'id');
+    }
+}
