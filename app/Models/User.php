@@ -51,4 +51,24 @@ class User extends Authenticatable
     {
         return $this->hasMany(HelpTickets::class, 'createdBy', 'id');
     }
+
+    public function isAdmin()
+    {
+        if($this->role == 'ADMIN')
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function isTutor()
+    {
+        if($this->role == 'TUTOR')
+        {
+            return true;
+        }
+
+        return false;
+    }
 }

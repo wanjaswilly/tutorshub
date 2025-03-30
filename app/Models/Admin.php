@@ -9,7 +9,12 @@ class Admin extends Model
     //
 
     protected $filleable = [
-
+        'userID', # from users
+        'adminLevel', # SUPERADMIN, ADMIN, SUPPORT, DEV
+        'adminIdentification', # Government Issued : type, value, imageName
+        'adminConatcts', # array of contacts
+        'adminStatus', # Active, Deactivated, Pending
+        'createdBy', # super admin -->from admins table :default is 1000 -->system-generated
     ];
 
 

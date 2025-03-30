@@ -8,7 +8,18 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Student extends Model
 {
 
-    protected $fillable = [];
+    protected $fillable = [
+        'userID', # from users table
+        'paidRegistration', # boolean
+        'studentBio', # small bio
+        'currentSchool', # pri, secondary
+        'studentLocation', # area from which
+        'isStudentMinor', # boolean : -> to get parent contact, 
+        'studentContact', # array of contacts : name & value
+        # if is minor 
+        'guardianName', # name of the guardian
+        'guardianRelation', # parent, sibling, etc 
+    ];
 
 
     public function learningPackages() : HasMany 

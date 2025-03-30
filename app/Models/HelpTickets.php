@@ -12,7 +12,12 @@ class HelpTickets extends Model
     //
 
     protected $fillable = [
-
+        'helpCategory', # Technical(signup), Billing, Tutoring, Support, Others
+        'subject', # summary of the issue
+        'issueDescription', # lengthy description
+        'attachments', # array(filenames of the attachments)
+        'replies', # array(tracks the following): from, datetime, response, attachments
+        'issueStatus', # Pending, In Progress, Solved, Flagged 
     ];
 
     public function owner()

@@ -11,10 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('school_categories', function (Blueprint $table) {
+        Schema::create('tutors_messages', function (Blueprint $table) {
             $table->id();
-            $table->string('schoolName'); # name eg primary
-            $table->string('schoolDescription'); # description : eg curiculum, style etc
+            $table->foreignId('userID')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
+            $table->json('messages'); # json : from, studentTutorsID(chat in reference), date, time, message, reply, status(read/unread)
             $table->timestamps();
         });
     }
@@ -24,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('school_categories');
+        Schema::dropIfExists('tutors_messages');
     }
 };

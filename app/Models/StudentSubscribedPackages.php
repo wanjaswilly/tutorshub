@@ -9,7 +9,12 @@ class StudentSubscribedPackages extends Model
 {
     //
 
-    protected $fillable = [];
+    protected $fillable = [
+        'packageID', # from packages table
+        'packageStatus', # Not Started, In Progress, Completed, Cancelled. 
+        'remainingLessons', # no of lessons remaining
+        'lessonCodes', # array(lesson unique codes) : tutorID, subject, lessonStartCode, lessonEndCode.   
+    ];
 
     public function learningPackage() : BelongsTo 
     {

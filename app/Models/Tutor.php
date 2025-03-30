@@ -8,7 +8,25 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Tutor extends Model
 {
     //
-    protected $fillable = [];
+    protected $fillable = [
+        'userID', # from users table
+        'tutorResume', # uploaded cv/resume
+        'tutorsPackages', # array : packageID, lessons, 
+        'otherTutorServices', # apart from normal lessons, what do they offer
+        'paidCurrentSubscription', # boolean
+        'tutorsBio', # tutors self description
+        'tutorsExperience', # like taught or coached
+        'tutorsContacts', # array of contact details 
+        'tutorsIdentification', # Government issued 
+        'tutorsLocation',  # where the tutor is from
+        'showContactDetails', # display conatct details
+        'tutorAvailabilityStatus', # available, fully-booked, offline
+        'tutorMessageCount', # counts all tutors unread messages
+        # in the case of suspended
+        'isTutorSuspended', # boolean
+        'suspensionReason', # array : datetime, studentID, ticketID, adminID, reasonForSuspension,  
+        'returnDate', # date of return
+    ];
 
     public function myStudents() : HasMany 
     {

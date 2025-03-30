@@ -13,6 +13,12 @@ return new class extends Migration
     {
         Schema::create('admins', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('userID')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade'); # from users
+            $table->string('adminLevel')->default('ADMIN'); # SUPERADMIN, ADMIN, SUPPORT, DEV
+            $table->json('adminIdentification'); # Government Issued : type, value, imageName
+            $table->json('adminConatcts'); # array of contacts
+            $table->string('adminStatus')->default('Pending'); # Active, Deactivated, Pending
+            $table->integer('createdBy')->default(1000); # default is 1000 -->system-generated
             $table->timestamps();
         });
     }

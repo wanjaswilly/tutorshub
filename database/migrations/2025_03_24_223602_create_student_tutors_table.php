@@ -13,6 +13,11 @@ return new class extends Migration
     {
         Schema::create('student_tutors', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('studentID')->constrained('students', 'id')->onUpdate('cascade')->onDelete('cascade'); # from students table
+            $table->foreignId('tutorID')->constrained('tutors', 'id')->onUpdate('cascade')->onDelete('cascade'); # from tutors table
+            $table->foreignId('studentSubscribedPackages')->constrained('student_subscribed_packages', 'id')->onUpdate('cascade')->onDelete('cascade'); # from students subscribed packages
+            $table->json('subjects'); # json : subjectName, noOfLessons, grade, comments, remarks 
+            $table->integer('assignedLessons'); # a packege has x no of lessons, this tutor has y lessons from it
             $table->timestamps();
         });
     }

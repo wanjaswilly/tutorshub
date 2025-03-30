@@ -10,7 +10,10 @@ class SchoolCategories extends Model
 {
     //
 
-    protected $fillable = [];
+    protected $fillable = [
+        'schoolName', # name eg primary
+        'schoolDescription', # description : eg curiculum, style etc
+    ];
 
     public function createdBy() : BelongsTo 
     {
