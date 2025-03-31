@@ -16,9 +16,9 @@
 
     <!-- Scripts -->
 
-    {{-- <link rel="stylesheet" href="{{ asset('build/assets/app-DqME6eCz.css') }}"> 
-        <script src="{{ asset('build/assets/app-D-03kJxt.js') }}"></script> --}}
-    @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+    <link rel="stylesheet" href="{{ asset('build/assets/app-DqME6eCz.css') }}"> 
+        <script src="{{ asset('build/assets/app-D-03kJxt.js') }}"></script>
+    {{-- @vite(['resources/sass/app.scss', 'resources/js/app.js']) --}}
 </head>
 
 <body>

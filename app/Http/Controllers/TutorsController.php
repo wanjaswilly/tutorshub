@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\NewMessageRequest;
 use App\Http\Requests\TutorsProfileUpdator;
 use App\Models\Tutor;
 use App\Services\TutorsManagerService;
@@ -22,7 +23,9 @@ class TutorsController extends Controller
         }
         $this->tutorsManager = new TutorsManagerService();
     }
-            
+           
+    ################## Tutors Profile ##################
+
     /**
      * Profile
      *
@@ -59,7 +62,7 @@ class TutorsController extends Controller
     {
         $request = $request->validated();
 
-        if($this->tutorsManager->UpdateTutorsProfile($request))
+        if($this->tutorsManager->CreateOrUpdateTutorsProfile($request))
         {
             # update the tutor
             $this->tutor = $this->tutor->tutor;
@@ -70,6 +73,47 @@ class TutorsController extends Controller
         return $this->Profile();
     }
 
+    ################## Messages #####################
+    public function MyMessages()
+    {
+        return view('tutor.messages')->with('tutor', $this->tutor);
+    }
+
+    public function CreateNewMessage()
+    {
+        return view('tutor.newMessage');
+    }
+
+    public function GetConversation(string $coversationID)
+    {
+        return view('tutor.conversationView')->with('conversation', $this->tutorsManager->GetConversation($coversationID));
+    }
+
+    public function SaveNewMessage(NewMessageRequest $request)
+    {
+        $request = $request->validated();
+        
+        # save & return the conversation
+        if($conversationID = $this->tutorsManager->SaveNewMessage($request)){
+            return $this->GetConversation($conversationID);
+        }
+    }
+
+    public function ReplyToMessage(Request $request, string $coversationID)
+    {
+        if($this->tutorsManager->ReplyToMessage($request)){
+            # something for later
+        }
+        return $this->GetConversation($coversationID);
+    }
+
+
+    ################## Lessons ######################
+
+    ################## Support & tickets ##############
+
+    
+    
 
 
 }
