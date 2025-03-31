@@ -10,6 +10,7 @@ class Tutor extends Model
     //
     protected $fillable = [
         'userID', # from users table
+        'tutorProfileImage', # file name
         'tutorResume', # uploaded cv/resume
         'tutorsPackages', # array : packageID, lessons, 
         'otherTutorServices', # apart from normal lessons, what do they offer
@@ -22,11 +23,17 @@ class Tutor extends Model
         'showContactDetails', # display conatct details
         'tutorAvailabilityStatus', # available, fully-booked, offline
         'tutorMessageCount', # counts all tutors unread messages
+        'isTutorApproved', # allowed to start tutoring
         # in the case of suspended
         'isTutorSuspended', # boolean
         'suspensionReason', # array : datetime, studentID, ticketID, adminID, reasonForSuspension,  
         'returnDate', # date of return
     ];
+
+    public function user()
+    {
+        $this->belongsTo(User::class, 'userID', 'id');
+    }
 
     public function myStudents() : HasMany 
     {

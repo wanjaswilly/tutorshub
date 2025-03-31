@@ -52,6 +52,11 @@ class User extends Authenticatable
         return $this->hasMany(HelpTickets::class, 'createdBy', 'id');
     }
 
+    public function tutor()
+    {
+        return $this->hasOne(Tutor::class, 'userID', 'id');
+    }
+
     public function isAdmin()
     {
         if($this->role == 'ADMIN')
