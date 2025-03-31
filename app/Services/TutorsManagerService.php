@@ -27,7 +27,7 @@ class TutorsManagerService
             'identificationFileName' => $identificationFileName,
         ]);
 
-        $tutorProfile = Tutor::create([
+        $tutorProfile = Tutor::updateOrCreate([
             'userID' => $this->tutor->id, # from users table
             'tutorProfileImage' => $profileImageName, # file name
             'tutorResume' => $resumeFileName, # uploaded cv/resume

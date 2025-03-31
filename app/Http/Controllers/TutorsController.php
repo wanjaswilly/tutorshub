@@ -35,12 +35,27 @@ class TutorsController extends Controller
     }
         
     /**
-     * UpdateProfile - updates the tutors profile with their data
+     * CreateProfile
+     *
+     * @return view
+     */
+    public function CreateProfile()
+    {
+        return view('tutor.createProfile');
+    }
+
+    public function UpdateProfileView()
+    {
+        return view('tutor.updateProfile')->with('tutor', $this->tutor);
+    }
+
+    /**
+     * UpdateProfile - updates/creates the tutors profile with their data
      *
      * @param  FormRequest $request - validated data
      * @return view 
      */
-    public function UpdateProfile(TutorsProfileUpdator $request)
+    public function CreateOrUpdateProfile(TutorsProfileUpdator $request)
     {
         $request = $request->validated();
 
@@ -54,6 +69,7 @@ class TutorsController extends Controller
         # the profile is not updated, base profile
         return $this->Profile();
     }
+
 
 
 }
