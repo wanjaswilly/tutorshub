@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('packageStatus')->default('Not Started'); # Not Started, In Progress, Completed, Cancelled. 
             $table->integer('remainingLessons'); # no of lessons remaining
             $table->json('lessonCodes')->nullable(); # array(lesson unique codes) : tutorID, subject, lessonStartCode, lessonEndCode.
+            $table->foreignId('studentID')->constrained('students', 'id')->onUpdate('cascade')->onDelete('cascade');
             $table->timestamps();
         });
     }

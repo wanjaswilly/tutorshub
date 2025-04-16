@@ -13,7 +13,8 @@ class StudentSubscribedPackages extends Model
         'packageID', # from packages table
         'packageStatus', # Not Started, In Progress, Completed, Cancelled. 
         'remainingLessons', # no of lessons remaining
-        'lessonCodes', # array(lesson unique codes) : tutorID, subject, lessonStartCode, lessonEndCode.   
+        'lessonCodes', # array(lesson unique codes) : tutorID, subject, lessonStartCode, lessonEndCode. 
+        'studentID', # from students table  
     ];
 
     public function learningPackage() : BelongsTo 
@@ -23,6 +24,6 @@ class StudentSubscribedPackages extends Model
 
     public function student() : BelongsTo
     {
-        return $this->belongsTo(Student::class, 'student', 'id');
+        return $this->belongsTo(Student::class, 'studentID', 'id');
     }
 }

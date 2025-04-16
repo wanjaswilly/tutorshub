@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'userType',
     ];
 
     /**
@@ -59,7 +60,7 @@ class User extends Authenticatable
 
     public function isAdmin()
     {
-        if($this->role == 'ADMIN')
+        if($this->userType == 'Admin')
         {
             return true;
         }
@@ -69,7 +70,7 @@ class User extends Authenticatable
 
     public function isTutor()
     {
-        if($this->role == 'TUTOR')
+        if($this->userType == 'Tutor')
         {
             return true;
         }

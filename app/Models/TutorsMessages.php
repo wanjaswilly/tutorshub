@@ -8,6 +8,7 @@ class TutorsMessages extends Model
 {
     protected $fillable = [
         'userID', # from users
-        'messages', # json : from, studentTutorsID(chat in reference), date, time, message, reply, status(read/unread)
+        'messages', # json :'userID_StudentSubscribedPackeID_number': {from, to, datetime, message, replyTo(nullable), status(read/unread), attachments}
+        'unreadMessages', # number of unread messages from different users
     ];
 }

@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('tutors_messages', function (Blueprint $table) {
             $table->id();
             $table->foreignId('userID')->constrained('users', 'id')->onUpdate('cascade')->onDelete('cascade');
-            $table->json('messages'); # json : from, studentTutorsID(chat in reference), date, time, message, reply, status(read/unread)
+            $table->json('messages'); # json : 'userID_StudentSubscribedPackeID_number': {from, to, datetime, message, replyTo(nullable), status(read/unread), attachments}
+            $table->integer('unreadMessages')->default(0);
             $table->timestamps();
         });
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class Tutor extends Model
 {
@@ -42,17 +43,22 @@ class Tutor extends Model
 
     public function myPackages() : HasMany
     {
-        return $this->hasMany(StudentSubscribedPackages::class, 'taughtBy', 'id');
+        return $this->hasMany(StudentTutors::class, 'tutorsID', 'id');
     }
 
     public function activePackages() : HasMany
     {
-        return $this->myPackages()->where('status', '=', 'active');
+        return $this->myPackages()->packageDetails()->where('status', '=', 'active');
     }
 
     public function completedPackages() : HasMany
     {
-        return $this->myPackages()->where('status', '=', 'completed');
+        return $this->myPackages()->packageDetails()->where('status', '=', 'completed');
+    }
+
+    public function ongoingPackages() : HasMany
+    {
+        return $this->myPackages()->packageDetails()->where('status', '=', 'ongoing');
     }
 
     public function myTickets() : HasMany

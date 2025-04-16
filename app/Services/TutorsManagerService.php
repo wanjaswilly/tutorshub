@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Models\StudentSubscribedPackages;
 use App\Models\Tutor;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -13,6 +14,10 @@ class TutorsManagerService
     public function __construct()
     {
         $this->tutor = Auth::user();
+        # check if a tutor profile exists already & assign it to tutor
+        if(Tutor::where('userID', $this->tutor->id)->first()){
+            $this->tutor = Tutor::where('userID', $this->tutor->id)->first();
+        }
     }
     
     /**
@@ -57,55 +62,32 @@ class TutorsManagerService
     }
     
     /**
-     * SaveNewMessage - saves new message
+     * TutoringStudents gets all students the tutor is teaching & the package details
      *
-     * @param  mixed $newMessage new message's data
-     * @return bool saved message to database
+     * @return eloquent-object all students for the tutor
      */
-    public function SaveNewMessage($newMessage) : bool
+    public function TutoringStudents()
     {
-        # load the tutors messages
-        # create the conversation ID in this format: 'userID_StudentSubscribedPackeID_number'
-        # add the new message: create a new user entry in this manner 
-            # 'userID_StudentSubscribedPackeID_number': {datetime, message, replyTo(nullable), attachments} 
-        # update the json
-        
-        if(true){
-            return true;
-        }
-
-        return false;
-
+        return $this->tutor->myPackages();
     }
     
     /**
-     * ReplyToMessage - replies to a given message
+     * `TeachingPackageDetails()` gets a student teaching package details
      *
-     * @param  mixed $reply reply data
-     * @return bool saved the reply
+     * @param  mixed $studentTeachingPackageID
+     * @return eloquent-object package details
      */
-    public function ReplyToMessage($reply) :bool
+    public function TeachingPackageDetails($studentTeachingPackageID) : mixed 
     {
-        # load the tutors messages
-        # get the conversation & add the reply message
-        # update the json
+        return StudentSubscribedPackages::find($studentTeachingPackageID);    
+    }
 
-        if(true){
-            return true;
-        }
-        return false;
+    ############ Lessons ################
+    public function NewLesson($studentTutorsID)
+    {
+        # load package details from student tutors
+        # if code based is enabled, generate code, send to student
+        # save code
     }
     
-    /**
-     * GetConversation - returns a given conversation in messages
-     *
-     * @param  mixed $conversationID unique identifier of the conversation
-     * @return array
-     */
-    public function GetConversation(string $conversationID) :array
-    {
-        # load all messages
-        # get the conversation & return it
-        return [];
-    }
 }
