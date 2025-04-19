@@ -12,7 +12,7 @@ class StudentTutors extends Model
     protected $fillable = [
         'studentID', # from students table
         'tutorID', # from tutors table
-        'studentSubscribedPackage', # from students subscribed packages
+        'studentSubscribedPackage', # id from students subscribed packages
         'subjects', # json : subjectName, noOfLessons, grade, comments, remarks 
         'assignedLessons', # a packege has x no of lessons, this tutor has y lessons from it
     ];
@@ -27,7 +27,7 @@ class StudentTutors extends Model
         return $this->belongsTo(Tutor::class, 'tutorID', 'id');    
     }
 
-    public function packageDetails() : HasOne
+    public function subscribedPackage() : HasOne
     {
         return $this->hasOne(StudentSubscribedPackages::class, 'id', 'studentSubscribedPackage');
     }

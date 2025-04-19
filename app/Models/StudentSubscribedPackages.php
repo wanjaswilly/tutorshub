@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class StudentSubscribedPackages extends Model
 {
@@ -25,5 +26,10 @@ class StudentSubscribedPackages extends Model
     public function student() : BelongsTo
     {
         return $this->belongsTo(Student::class, 'studentID', 'id');
+    }
+
+    public function studentTutor() :HasOne
+    {
+        return $this->hasOne(StudentTutors::class, 'studentSubscribedPackage', 'id');
     }
 }
